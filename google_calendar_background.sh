@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 from __future__ import print_function
 from apiclient.discovery import build
 from appscript import app, mactypes, its
