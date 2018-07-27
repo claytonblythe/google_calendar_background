@@ -9,7 +9,7 @@ from oauth2client import file, client, tools
 from PIL import Image, ImageDraw, ImageFont
 import subprocess
 
-def make_solid_image(size=(2880,1880), color=(60,60,60)):
+def make_solid_image(size=(3840,2160), color=(60,60,60)):
     return Image.new('RGB', size=size, color=color)
 
 def draw_events(img, events, fill=(230,230,230)):
