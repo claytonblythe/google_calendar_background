@@ -6,4 +6,7 @@ This is a project called google_calendar_background created by Clayton Blythe on
 
 Email: claytondblythe@gmail.com
 
+
+I wanted to make a minimalistic desktop with just my calendar, maybe the weather using Google API's. Here it is.
+
 ![Alt Test](https://raw.githubusercontent.com/claytonblythe/google_calendar_background/master/calendar.png)
