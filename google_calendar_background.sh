@@ -66,7 +66,6 @@ def main():
                                           orderBy='startTime').execute()
     events = events_result.get('items', [])
     relevant_events = get_relevant_events(events)
-    print(relevant_events)
     make_calendar(relevant_events)
     change_desktops()
 
