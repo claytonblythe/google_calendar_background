@@ -2,7 +2,7 @@
 from __future__ import print_function
 from apiclient.discovery import build
 from appscript import app, mactypes, its
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from dateutil import parser
 from httplib2 import Http
 from oauth2client import file, client, tools
@@ -48,6 +48,16 @@ def change_desktops():
         desk.picture.set(mactypes.File(f))
     subprocess.check_call("killall Dock", shell=True)
 
+def get_relevant_events(events, days=1):
+    relevant_events = []
+    for idx, event in enumerate(events):
+        if idx == 0:
+            first_time = parser.parse(event['start'].get('dateTime', event['start'].get('date')))
+        raw_time = parser.parse(event['start'].get('dateTime', event['start'].get('date')))
+        if raw_time < first_time + timedelta(days=days):
+            relevant_events.append(event)
+    return relevant_events
+
 def main():
     now = datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
     service = get_api_service()
@@ -55,7 +65,9 @@ def main():
                                           maxResults=10, singleEvents=True,
                                           orderBy='startTime').execute()
     events = events_result.get('items', [])
-    make_calendar(events)
+    relevant_events = get_relevant_events(events)
+    print(relevant_events)
+    make_calendar(relevant_events)
     change_desktops()
 
 if __name__ == "__main__":
