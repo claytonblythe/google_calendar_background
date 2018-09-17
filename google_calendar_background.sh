@@ -55,8 +55,10 @@ def get_relevant_events(events, days=1):
             first_time = parser.parse(event['start'].get('dateTime', event['start'].get('date')))
         raw_time = parser.parse(event['start'].get('dateTime', event['start'].get('date')))
         raw_time = raw_time.replace(tzinfo=first_time.tzinfo)
-        if raw_time < first_time + timedelta(days=days):
+        if raw_time < datetime.now(tz=first_time.tzinfo) + timedelta(days=days):
             relevant_events.append(event)
+        else:
+            break
     return relevant_events
 
 def main():
