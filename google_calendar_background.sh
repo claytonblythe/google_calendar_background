@@ -10,18 +10,20 @@ from PIL import Image, ImageDraw, ImageFont
 import subprocess
 
 def make_solid_image(size=(3840,2160), color=(60,60,60)):
-    return Image.new('RGB', size=size, color=color)
+    img = Image.open("/Library/Desktop Pictures/Mojave Day.jpg")
+    img.resize(size=size, resample=True)
+    return img
 
 def draw_events(img, events, fill=(230,230,230)):
     d = ImageDraw.Draw(img)
-    font = ImageFont.truetype("~/Library/Fonts/fura_bold.otf", 26, encoding="unic")
+    font = ImageFont.truetype("~/Library/Fonts/fura_bold.otf", 40, encoding="unic")
     start = 50
     for idx, event in enumerate(events):
         raw_time = event['start'].get('dateTime', event['start'].get('date'))
         time = parser.parse(raw_time).strftime('%H:%M')
         summary = event['summary']
-        d.text((30, start + 80 * idx), time + ' |', fill=fill, font=font)
-        d.text((150, start + 80 * idx), summary, fill=fill, font=font)
+        d.text((330, start + 80 * idx), time , fill=fill, font=font)
+        d.text((500, start + 80 * idx), summary, fill=fill, font=font)
     return img
 
 def get_api_service():
