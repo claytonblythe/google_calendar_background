@@ -10,7 +10,10 @@ from PIL import Image, ImageDraw, ImageFont
 import subprocess
 
 def make_solid_image(size=(3840,2160), color=(60,60,60)):
-    img = Image.open("/Library/Desktop Pictures/Mojave Day.jpg")
+    if 6 < datetime.now().hour < 21:
+        img = Image.open("/Library/Desktop Pictures/Mojave Day.jpg")
+    else:
+        img = Image.open("/Library/Desktop Pictures/Mojave Night.jpg")
     img.resize(size=size, resample=True)
     return img
 
