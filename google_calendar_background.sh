@@ -11,9 +11,9 @@ import subprocess
 
 def make_solid_image(size=(3840,2160), color=(60,60,60)):
     if 6 < datetime.now().hour < 21:
-        img = Image.open("/Library/Desktop Pictures/Mojave Day.jpg")
+        img = Image.open("/Library/Desktop Pictures/solar_gradients_light.png")
     else:
-        img = Image.open("/Library/Desktop Pictures/Mojave Night.jpg")
+        img = Image.open("/Library/Desktop Pictures/solar_gradients_dark.png")
     img.resize(size=size, resample=True)
     return img
 
