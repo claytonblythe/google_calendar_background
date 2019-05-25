@@ -13,4 +13,4 @@ I wanted to make a minimalistic desktop with just my calendar, maybe the weather
 */7 * * * * cd /Users/clayton.blythe/drive/github/google_calendar_background && /Users/clayton.blythe/drive/github/google_calendar_background/google_calendar_background.sh
 `
 
-![Alt Test](https://raw.githubusercontent.com/claytonblythe/google_calendar_background/master/calendar.png)
+![Alt Test](https://raw.githubusercontent.com/claytonblythe/google_calendar_background/master/calendar.jpg)
