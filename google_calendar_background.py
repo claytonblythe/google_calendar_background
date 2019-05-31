@@ -2,6 +2,7 @@ from __future__ import print_function
 
 from datetime import datetime, timedelta
 from io import BytesIO
+import json
 
 import requests
 from PIL import Image, ImageDraw, ImageFont
@@ -28,6 +29,8 @@ def draw_events(img, events, fill=(230, 230, 230)):
         summary = event['summary']
         d.text((x_offset, y_offset + 80 * idx), time, fill=fill, font=font)
         d.text((description_offset, y_offset + 80 * idx), summary, fill=fill, font=font)
+    zillow_price = round(float(get_stock_quote('Z')), 2)
+    d.text((3000, 430), f"Z price: {zillow_price}", fill=fill, font=font)
     return img
 
 
@@ -42,6 +45,7 @@ def make_calendar(events):
     calendar = draw_events(img, events)
     weather_img = get_weather_img()
     img.paste(weather_img, (3000, 30), weather_img)
+    zillow_price = get_stock_quote('Z')
     change_desktops("./resources/black.jpg")
     calendar.save('calendar.jpg')
 
@@ -59,6 +63,12 @@ def get_weather_img():
     resp = requests.get(url="https://wttr.in/Seattle_tqp0_transparency=120.png")
     return Image.open(BytesIO(resp.content)).resize((800, 400), resample=True)
 
+def get_stock_quote(ticker):
+    with open("./alphavantage_creds.json") as creds:
+        token = json.loads(creds.read())["token"]
+    url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={ticker}&apikey={token}"
+    r = requests.get(url)
+    return r.json()['Global Quote']['05. price']
 
 def main():
     now = datetime.utcnow()
