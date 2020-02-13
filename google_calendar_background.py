@@ -61,7 +61,7 @@ def change_desktops(default_file=None):
 
 
 def get_weather_img():
-    resp = requests.get(url="https://wttr.in/Seattle_tqp0_transparency=220.png")
+    resp = requests.get(url="https://wttr.in/Seattle_tqp0_transparency=220.png?m")
     return Image.open(BytesIO(resp.content)).resize((800, 400), resample=True)
 
 def get_stock_quote(ticker):
