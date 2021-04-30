@@ -26,5 +26,5 @@ rsa==4.0
 six==1.13.0
 smmap2==2.0.5
 uritemplate==3.0.1
-urllib3==1.25.7
+urllib3==1.25.8
 watchdog==0.9.0
